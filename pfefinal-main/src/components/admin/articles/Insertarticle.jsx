@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from "axios"
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
@@ -93,18 +93,26 @@ data.append('upload_preset', 'oumaima');
 data.append('cloud_name', 'dcex70obk');
 data.append('public_id', file.name);
 
-axios.post('https://api.cloudinary.com/v1_1/dcex70obk/image/upload', data)
-          .then((response) => response.data)
-          .then((data) => {
-            console.log(data);
-           setArticle({...article,imageart:data.url}) ;
-            load(data);
-          })
-          .catch((error) => {
-            console.error('Error uploading file:', error);
-            error('Upload failed');
-            abort();
-          });
+fetch('https://api.cloudinary.com/v1_1/dcex70obk/image/upload', {
+  method: 'POST',
+  body: data,
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+})
+.then(data => {
+  console.log('Upload successful:', data.url);
+  setArticle({...article,imageart:data.url}) ;
+  load(data);
+})
+.catch(error => {
+  console.error('Upload failed:', error);
+  abort();
+});
+
       },
     };
   };

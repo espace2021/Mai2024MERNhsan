@@ -103,7 +103,7 @@ const Affichearticletable = () => {
                             size="md"
                             className="text-warning btn-link edit"
                         >
-                            <i class="fa-solid fa-pen-to-square"></i>
+                            <i className="fa-solid fa-pen-to-square"></i>
                         </Button>
                         <Button
                             onClick={(e) => {
