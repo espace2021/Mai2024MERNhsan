@@ -12,7 +12,7 @@ const gridRef = useRef(); // Optional - for accessing Grid's API
 
 // Each Column Definition results in one Column.
 const [columnDefsOrder, setColumnDefsOrders] = useState([
-{field: 'user.nom', filter: 'agTextColumnFilter',
+{field: 'user', filter: 'agTextColumnFilter',
 floatingFilter: true,},
 {field: 'amount', filter: 'agNumberColumnFilter',
 floatingFilter: true,},

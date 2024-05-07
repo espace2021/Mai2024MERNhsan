@@ -97,9 +97,7 @@ router.put('/:articleId', async (req, res)=> {
 
 router.put('/updateqte/:articleId', async (req, res)=> {
     try {
-        console.log("update")
-        console.log(req.params.articleId)
-        console.log(req.body.nouvqtestock)
+      
      const art = await Article.findByIdAndUpdate(
          req.params.articleId,
          { $set:{ qtestock: req.body.nouvqtestock } },

@@ -14,7 +14,7 @@ const orderSchema = new mongoose.Schema(
         price: {type: Number,default: 0 }
 }, 
 ], 
-    user: { type: String,default: "Passager" }, 
+    user: { type: String, required: true, }, 
     amount: { type: Number, required: true, }, 
     status: { type: String, default: "Not processed",
      enum: [ "Not processed", 

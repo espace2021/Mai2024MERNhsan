@@ -12,9 +12,8 @@ import {updateArticleQte} from "../../features/articleslice"
 //import LoginAccount from "./LoginAccount";
 
 const MySwal = withReactContent(Swal);
+
 function StripePayment() {
-
-
 
 let navigate=useNavigate();
 const {total} = useParams();
@@ -30,7 +29,8 @@ name: 'Total',
 price: `${total}`,
 });
 const priceForStripe = product.price * 100;
-const handleSuccess = () => {
+
+const handleSuccess = (client) => {
 MySwal.fire({
 icon: 'success',
 title: 'Payment was successful',
@@ -47,10 +47,13 @@ dispatch(updateArticleQte(art))
 
 })
 
+console.log(client)
 let order={
     
     allProduct: cart.cartItems.map(article => ({ article: article._id, quantity: article.cartQuantity ,price:article.cartQuantity*article.prix})),
-    
+      
+    user:client,
+
     amount: total
     }
     
@@ -70,7 +73,8 @@ time: 4000,
 
 
 };
-const payNow = async (token) => { console.log(JSON.stringify(token))
+const payNow = async (token) => { 
+    
 try {
 const response = await axios({
 url: 'http://localhost:3001/api/payment',
@@ -82,7 +86,11 @@ token,
 
 });
 if (response.status === 200) {
-handleSuccess();
+    const data =token
+    console.log(data.card.name)
+    const client = data.card.name
+  
+handleSuccess(client);
 }
 } catch (error) {
 handleFailure();

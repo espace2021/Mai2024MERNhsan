@@ -7,6 +7,8 @@ router.post('/', async (req, res) => {
 
    
     const { allProduct, user, amount} = req.body;
+
+    console.log(user)
   
     const newOrder = new Order({ allProduct:allProduct, user:user,amount:amount })
     try {
@@ -22,8 +24,6 @@ router.get('/', async (req, res, )=> {
     try {
         let Orders = await Order.find({}).populate('allProduct.article').exec();
         
-        
-        console.log(Orders)
         if (Orders) {
         return res.json({ Orders });
         }
