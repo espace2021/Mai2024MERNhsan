@@ -3,9 +3,9 @@ import {OrderService} from "../services/order-service"
 
 export const createOrder = createAsyncThunk(
 "order/createOrder",
-async (order, thunkAPI) => {
+async (order, thunkAPI) => { 
 const { rejectWithValue } = thunkAPI;
-try{
+try{  console.log(order)
 const res= await OrderService.AddOrder(order);
 return res.data
 }

@@ -6,7 +6,7 @@ import withReactContent from 'sweetalert2-react-content';
 import { useNavigate,useParams } from "react-router-dom";
 
 import {useDispatch,useSelector} from "react-redux";
-import {createOrder} from "../../features/orderslice"
+//import {createOrder} from "../../features/orderslice"
 import { clearCart } from "../../features/cartslice";
 import {updateArticleQte} from "../../features/articleslice"
 //import LoginAccount from "./LoginAccount";
@@ -57,7 +57,7 @@ let order={
     amount: total
     }
     
-    dispatch(createOrder(order))
+ //   dispatch(createOrder(order))
     //dispatch(clearCart())
 
 

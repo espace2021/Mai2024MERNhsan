@@ -25,7 +25,7 @@ import Insertcategorie from "./components/admin/categories/Insertcategorie"
 import Editcategorie from "./components/admin/categories/Editcategorie";
 import ListOrders from "./components/admin/orders/Listorders";
 
-
+import SuccessPayment from './components/client/sucessPayment'
 
 
 function App() {
@@ -65,6 +65,7 @@ function App() {
 <Route path="/articlesclient" element={<Listarticles/>}/>
 <Route path="/cart" element={<Cart/>}/>
 <Route path='/pay/:total' element={<StripePayment/>}/>
+<Route path="/successPayment" element={<SuccessPayment/>}/>
       </Routes>
 
      </Router>
