@@ -1,19 +1,13 @@
+import Table from 'react-bootstrap/Table';
 import ReactLoading from 'react-loading';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch,useSelector} from "react-redux";
 
 import {updateOrder,deleteOrder} from "../../../features/orderSlice";
 
-import React, { useEffect, useRef } from 'react';
-import $ from 'jquery';
-import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "../../../../node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css";
-
-import "datatables.net-bs5";
 
 const AffOrders = () => {
 
-    
   const dispatch = useDispatch();
 
  const {orders,isLoading,error} = useSelector((state) =>state.order);
@@ -48,24 +42,13 @@ const statusColors = {
   
     
   }  
-
-  useEffect(() => {
-    
-    $(function() {
-      $("#example_table").DataTable();
-      });
-},[orders]);
     
   return (
     <>
 { isLoading ? <center><ReactLoading type='spokes' color="red" height={'8%'} width={'8%'} /></center> :null}
 {error ? <p>Impossible d'afficher la liste des articles...</p>:null}
 
-{ orders &&  orders.length>0 &&    <table 
-        id="example_table"
-        className="table table-striped table-bordered"
-        style={{ width: "100%" }}
-      >
+{ orders && <Table striped bordered hover>
         <thead>
           <tr>
             <th>Action</th>
@@ -128,7 +111,7 @@ const statusColors = {
             </tr>
           ))}
         </tbody>
-        </table>
+        </Table>
     }
      </>
   )

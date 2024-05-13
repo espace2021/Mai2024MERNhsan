@@ -16,10 +16,23 @@ const AddOrder=async(order)=> {
    
 return await Axios.post(ORDER_API+"/", order);
 }
-const EditOrder=async(obj)=> {
+const EditOrder=async (id, status) => {
+    try {
+      const response = await Axios.put(`${ORDER_API}/${id}`, {
+        status: status
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      return response;
+    } catch (error) {
+      console.error('Error updating order:', error);
+      throw error;
+    }
+  };
 
-return await Axios.put(ORDER_API + '/' + obj._id, obj )
-}
 export const OrderService = {
 GetOrder,
 GetOrderById,

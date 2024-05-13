@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
 // afficher la liste des commandes.
 router.get('/', async (req, res, )=> {
     try {
-        let Orders = await Order.find({}).populate('allProduct.article').exec();
+        let Orders = await Order.find({}, null, {sort: {'_id': -1}}).populate('allProduct.article').exec();
         
         if (Orders) {
         return res.json({ Orders });
@@ -31,15 +31,15 @@ router.get('/', async (req, res, )=> {
         console.log(err);
         }
     })
-    // modifier état commande
-    router.put('/:id', async (req, res) => {
-    const newStatus = req.body.status;
+
+// modifier état commande
+router.put('/:id', async (req, res) => {  
+     const newStatus = req.body.status;
     const orderId=req.params.id;
-    if (!['Not processed', 'Processing', 'Shipped', 'Delivered',
-    'Cancelled'].includes(newStatus)) {
+    if (!['Not processed', 'Processing', 'Shipped', 'Delivered'].includes(newStatus)) {
     res.status(403).json({ message: 'Invalid status value' }); return;
     }
-    try {
+    try { 
     const orderUpdated = await Order.findByIdAndUpdate(
     orderId,
     { status: newStatus },
@@ -48,7 +48,10 @@ router.get('/', async (req, res, )=> {
     if (!orderUpdated) {
     return res.status(404).json({ message: 'Order not found' });
     }
-    res.status(200).json(orderUpdated);
+    const order = await Order.findById(orderId).populate("allProduct.article").exec();
+              
+    res.status(200).json(order);
+   
     } catch (error) {
     res.status(404).json({ message: error.message });
     }

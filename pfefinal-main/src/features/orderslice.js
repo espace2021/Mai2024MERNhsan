@@ -29,10 +29,10 @@ return rejectWithValue(error.message);
 );
 export const updateOrder = createAsyncThunk(
 "order/updateOrder",
-async (obj, thunkAPI) => {
+async (order, thunkAPI) => {
 const { rejectWithValue } = thunkAPI;
-try{
-const res = await OrderService.EditOrder(obj);
+try{ 
+const res = await OrderService.EditOrder(order._id,order.status);
 return res.data;
 }
 catch (error) {
